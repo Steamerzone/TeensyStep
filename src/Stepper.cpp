@@ -2,7 +2,9 @@
 #include "Stepper.h"
 
 namespace TeensyStep
+
 {
+    constexpr int32_t Stepper::vMaxMax; constexpr uint32_t Stepper::aMax; //ewk added
     Stepper::Stepper(const int _stepPin, const int _dirPin)
         : current(0), stepPin(_stepPin), dirPin(_dirPin)
     {
@@ -81,15 +83,13 @@ namespace TeensyStep
 
     Stepper& Stepper::setPullInSpeed(int32_t speed)
     {
-        vPullIn = vPullOut = std::abs(speed);
-        return *this;
+        return setPullInOutSpeed(speed, speed);
     }
 
     Stepper& Stepper::setPullInOutSpeed(int32_t pullInSpeed, int32_t pullOutSpeed)
     {
         vPullIn = std::abs(pullInSpeed);
         vPullOut = std::abs(pullOutSpeed);
-
         return *this;
     }
 
